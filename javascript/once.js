@@ -1,15 +1,9 @@
-
 function once(fn) {
-  if (!this.hasBeenCalled) {
-    console.log('here')
-    return fn.apply(arguments);
-    
-  }
-  this.hasBeenCalled = true;
-  return undefined;
+  var called = false;
+  return function () {
+    if (!called) {
+      called = true;
+      return fn.apply(this, arguments);
+    }
+  };
 }
-
-
-logOnce = once(console.log)
-logOnce("foo") // -> "foo"
-logOnce("bar") // -> no effect
