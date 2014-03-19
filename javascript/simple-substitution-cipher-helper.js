@@ -1,7 +1,5 @@
 function SubstitutionCipher(abc1, abc2) {
 
-  var self = this;
-
   function getTranslator(abcFrom, abcTo) {
 
     var hash = {};
