@@ -1,3 +1,120 @@
+var Vector = function(compoments) {
+
+  self = this;
+  this.components = compoments;
+
+  function parallelOperation(vect1, vect2, operation) {
+
+    var comp1 = vect1.getComponents(),
+        comp2 = vect2.getComponents();
+
+    if (comp1.length != comp2.length)
+      throw 'Vectors need to be of the same length';
+
+    var newCompoments comp1.map(function (item, index) {
+      return operation(item, comp2[index]);
+    });
+    return new Vector(newCompoments);
+  }
+  this.getComponents = function () {
+    return self.components;
+  };
+  this.add = function (vect) {
+    return parallelOperation(self, vect, function (a,b) {return a+b;};
+  };
+  this.subtract = function (vect) {
+    return parallelOperation(self, vect, function (a,b) {return a-b;};
+  };
+  this.dot = function (vect) {
+    return parallelReduce(self, vect, 
+      function (a,b) {return a*b;}, 
+      function (a,b) {return a+b});
+
+    var comp1 = self.getComponents(),
+        comp2 = vect.getComponents();
+
+    if (comp1.length != comp2.length)
+      throw 'Vectors need to be of the same length';
+
+    var newCompoments comp1.reduce(function (accum, curr1, index) {
+      var curr2 = comp2[index];
+      accum = reduceOp(accum, parallelOp(curr1, curr2));
+    });
+    return new Vector(newCompoments);
+  };
+  this.norm = function () {
+    var temp = self.getComponents()
+      .map (function (item) {return item*item;})
+      .reduce(function (accum, curr) { return accum+curr; });
+    return Math.sqrt(temp);
+  };
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var Vector = function (components) {
   var self = this;
   this.components = components;
