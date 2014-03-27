@@ -9,7 +9,7 @@ var Vector = function (components) {
             comp2 = vect2.getComponents();
 
         if (comp1.length != comp2.length)
-            throw 'Vectors need to be of the same length';
+            throw new Error('Vectors need to be of the same length');
 
         var newCompoments = comp1.map(function (item, index) {
             return operation(item, comp2[index]);
