@@ -17,7 +17,7 @@ RNG.prototype.rand = function() {
       this.usedNumbers.push(retVal);
     }
   }
-  while(found);
+  while(!found);
   return retVal;
 }
 
