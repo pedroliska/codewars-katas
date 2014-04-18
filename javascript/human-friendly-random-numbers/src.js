@@ -3,24 +3,21 @@ function RNG(upperLimit) {
   this.usedNumbers = [];
 }
 
-RNG.prototype.rand = function() {
-  var retVal, 
-      found = false;
+RNG.prototype.rand = function () {
 
-  if (this.usedNumbers.length >= this.upperLimit)
+  if (this.usedNumbers.length == this.upperLimit)
     this.usedNumbers = [];
 
+  var retVal;
   do {
-    retVal = randomInt(this.upperLimit);
-    if (this.usedNumbers.indexOf(retVal) == -1) {
-      found = true;
-      this.usedNumbers.push(retVal);
-    }
-  }
-  while(!found);
+    retVal = getRandomInt(this.upperLimit);
+  } while(this.usedNumbers.indexOf(retVal) != -1);
+
+  this.usedNumbers.push(retVal);
   return retVal;
+
 }
 
-function randomInt(upperLimit) {
+function getRandomInt(upperLimit) {
   return Math.floor(Math.random() * upperLimit);
 }
