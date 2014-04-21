@@ -2,25 +2,25 @@ function RNG(upperLimit) {
   this.upperLimit = upperLimit;
   this.availableNumbers = [];
 }
-
 RNG.prototype.rand = function () {
 
-  if (this.availableNumbers.length == 0)
-    this.availableNumbers = initializeArray(this.upperLimit);
+  var randomIndex, retVal;
 
-  var randomIndex = getRandomInt(this.availableNumbers.length);
-  var retVal = this.availableNumbers[randomIndex];
+  if (!this.availableNumbers.length)
+    this.availableNumbers = initArray(this.upperLimit);
+
+  randomIndex = randomInt(this.availableNumbers.length);
+  retVal = this.availableNumbers[randomIndex];
   this.availableNumbers.splice(randomIndex, 1);
   return retVal;
-
 }
 
-function initializeArray(length) {
-  var i, a = [];
-  for(i = 0; i < length; i++)
-    a.push(i);
-  return a;
+function randomInt(upper) {
+  return Math.floor(Math.random() * upper);
 }
-function getRandomInt(upperLimit) {
-  return Math.floor(Math.random() * upperLimit);
+function initArray(upper) {
+  var i, retVal = [];
+  for (i = 0; i < upper; i++)
+    retVal.push(i);
+  return retVal;
 }
