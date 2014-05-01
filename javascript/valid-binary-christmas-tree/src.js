@@ -1,30 +1,31 @@
 // http://www.codewars.com/kata/52aebd2423b44356b8000578
 
 function isValidTree(root) {
-
-  if (root.ornament !== 'star')
-    return false;
-
-  if (!traverse(root.left))
-    return false;
-
-  return traverse(root.right);
-
+  return traverse(root, rootNodeCheck);
 }
 
-function traverse(node) {
+function rootNodeCheck(node) {
+  return node.ornament === 'star';
+}
 
+function subNodeCheck(node) {
+  if (!node.left && !node.right && node.color !== 'blue')
+    return false;
+
+  if ((node.left || node.right) && node.color !== 'red')
+    return false;
+  return true;
+}
+
+function traverse(node, validityCheckFn) {
   if (!node)
     return true;
 
-  if (!node.left && !node.right && node.color  !== 'blue')
-    return false;
-  if ((node.left || node.right) && node.color !== 'red')
+  if (!validityCheckFn(node))
     return false;
 
-  if (!traverse(node.left))
+  if (!traverse(node.left, subNodeCheck))
     return false;
 
-  return traverse(node.right);
-
+  return traverse(node.right, subNodeCheck);
 }
