@@ -16,4 +16,13 @@
 
   });
 
+
+  it('the root node should have a star ornament', function() {
+    
+    var tree = {"ornament":"sled","color":"yellow"};
+
+     expect(isValidTree(tree)).toBe(false);
+
+  });
+
 });
