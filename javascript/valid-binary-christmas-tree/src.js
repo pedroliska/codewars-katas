@@ -3,10 +3,10 @@
 function isValidTree(root) {
   return traverse(root, rootCheck);
 }
-function traverse(node, nodeCheckFn) {
+function traverse(node, checkFn) {
   return !node
-    || (nodeCheckFn(node) 
-      && traverse(node.left, childCheck) 
+    || (checkFn(node)
+      && traverse(node.left, childCheck)
       && traverse(node.right, childCheck));
 }
 function rootCheck(node) {
@@ -14,6 +14,6 @@ function rootCheck(node) {
 }
 function childCheck(node) {
   return (!node.left && !node.right)
-  ? node.color === 'blue'
-  : node.color === 'red';
+    ? node.color === 'blue'
+    : node.color === 'red';
 }
