@@ -3,9 +3,9 @@
 function guessGifts(wishList, presents) {
   return wishList.filter(function(wishItem) {
     return presents.some(function(present) {
-      return present.size == wishItem.size
-        && present.clatters == wishItem.clatters
-        && present.weight == wishItem.weight;
+      return ['size','clatters','weight'].every(function(accum, prop) {
+        return present[prop] == wishItem[prop];
+      })
     });
   }).map(function(wishItem) {
     return wishItem.name;
