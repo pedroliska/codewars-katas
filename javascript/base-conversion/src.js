@@ -1,8 +1,10 @@
+// http://codewars.com/kata/526a569ca578d7e6e300034e
+
 function convert(input, sourceAlph, targetAlph) {
 
   var
     sourcePositionMap = getPositionMap(sourceAlph),
-    targetPositionMap = getPositionMap(targetAlph),
+    targetSymbolMap = getSymbolMap(targetAlph),
     sourceBase = sourceAlph.length,
     targetBase = targetAlph.length,
     dividend,
@@ -21,13 +23,19 @@ function convert(input, sourceAlph, targetAlph) {
     dividend = Math.floor(dividend / targetBase);
   } while (dividend > 0);
   return remainderPositions.map(function(position) {
-    return targetPositionMap[position];
+    return targetSymbolMap[position];
   }).reverse().join('');
 }
 
 function getPositionMap(alph) {
+  return mapper(alph, function(accum, item, index) { accum[item] = index; });
+}
+function getSymbolMap(alph) {
+  return mapper(alph, function(accum, item, index) { accum[index] = item; });
+}
+function mapper(alph, reduceFn) {
   return alph.split('').reduce(function (accum, item, index) {
-    accum[item] = index;
+    reduceFn(accum, item, index);
     return accum;
   }, {});
 }
