@@ -1,20 +1,20 @@
 // http://codewars.com/kata/526a569ca578d7e6e300034e
 
 function convert(input, sourceAlph, targetAlph) {
-
   var
     sourcePositionMap = getPositionMap(sourceAlph),
     targetSymbolMap = getSymbolMap(targetAlph),
     sourceBase = sourceAlph.length,
     targetBase = targetAlph.length,
+    remainderPositions = [],
     dividend,
-    remainderPositions = [];
+    inputInDecimal;
 
-  // convert decimal base
-  var inputInDecimal = input.split('').reverse().reduce(function(accum, item, index) {
-    return accum 
-      + (Math.pow(sourceBase, index) * sourcePositionMap[item]);
-  }, 0);
+
+  // convert to decimal base
+  inputInDecimal = input.split('').reverse().reduce(function(accum, item, index) {
+    return accum + (Math.pow(sourceBase, index) * sourcePositionMap[item]);
+  });
 
   // convert to target base
   dividend = inputInDecimal;
@@ -24,18 +24,20 @@ function convert(input, sourceAlph, targetAlph) {
   } while (dividend > 0);
   return remainderPositions.map(function(position) {
     return targetSymbolMap[position];
-  }).reverse().join('');
+  }).join('');
 }
-
 function getPositionMap(alph) {
-  return mapper(alph, function(accum, item, index) { accum[item] = index; });
+  return mapper(alph, function(accum, item, index) {
+    accum[item] = index;
+    return accum;
+  });
 }
 function getSymbolMap(alph) {
-  return mapper(alph, function(accum, item, index) { accum[index] = item; });
+  return mapper(alph, function(accum, item, index) {
+    accum[index] = item;
+    return accum;
+  });
 }
 function mapper(alph, reduceFn) {
-  return alph.split('').reduce(function (accum, item, index) {
-    reduceFn(accum, item, index);
-    return accum;
-  }, {});
+  return alph.split('').reduce(reduceFn, {});
 }
