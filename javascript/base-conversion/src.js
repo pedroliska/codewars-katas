@@ -1,22 +1,35 @@
 // http://codewars.com/kata/526a569ca578d7e6e300034e
 
 function convert(input, sourceAlph, targetAlph) {
+
+  var inputInDecimal = convertToDecimal(input, sourceAlph);
+
+  return convertToTarget(inputInDecimal, targetAlph);
+
+}
+
+function convertToDecimal(input, sourceAlph) {
+
   var
     sourcePositionMap = getPositionMap(sourceAlph),
-    targetSymbolMap = getSymbolMap(targetAlph),
-    sourceBase = sourceAlph.length,
-    targetBase = targetAlph.length,
-    remainderPositions = [],
-    dividend,
-    inputInDecimal;
+    sourceBase = sourceAlph.length;
 
-
-  // convert to decimal base
-  inputInDecimal = input.split('').reverse().reduce(function(accum, item, index) {
+  return input.split('').reverse().map(function(sNumber) {
+    return Number(sNumber);
+  }).reduce(function(accum, item, index) {
     return accum + (Math.pow(sourceBase, index) * sourcePositionMap[item]);
   });
 
-  // convert to target base
+}
+
+function convertToTarget(inputInDecimal, targetAlph) {
+
+  var
+    targetSymbolMap = getSymbolMap(targetAlph),
+    targetBase = targetAlph.length,
+    remainderPositions = [],
+    dividend;
+
   dividend = inputInDecimal;
   do {
     remainderPositions.push(dividend % targetBase);
@@ -25,7 +38,9 @@ function convert(input, sourceAlph, targetAlph) {
   return remainderPositions.map(function(position) {
     return targetSymbolMap[position];
   }).join('');
+
 }
+
 function getPositionMap(alph) {
   return mapper(alph, function(accum, item, index) {
     accum[item] = index;
