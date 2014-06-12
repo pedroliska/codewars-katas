@@ -14,11 +14,9 @@ function convertToDecimal(input, sourceAlph) {
     sourcePositionMap = getPositionMap(sourceAlph),
     sourceBase = sourceAlph.length;
 
-  return input.split('').reverse().map(function(sNumber) {
-    return Number(sNumber);
-  }).reduce(function(accum, item, index) {
+  return input.split('').reverse().reduce(function(accum, item, index) {
     return accum + (Math.pow(sourceBase, index) * sourcePositionMap[item]);
-  });
+  }, 0);
 
 }
 
@@ -35,7 +33,7 @@ function convertToTarget(inputInDecimal, targetAlph) {
     remainderPositions.push(dividend % targetBase);
     dividend = Math.floor(dividend / targetBase);
   } while (dividend > 0);
-  return remainderPositions.map(function(position) {
+  return remainderPositions.reverse().map(function(position) {
     return targetSymbolMap[position];
   }).join('');
 

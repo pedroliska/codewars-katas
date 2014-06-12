@@ -20,22 +20,22 @@ describe('example tests', function() {
   
   it('should convert between numeral systems', function() {
 
-    //expect(convertToDecimal('15', dec)).toEqual(15);
-    //expect(convertToTarget(15, bin)).toEqual('1111');
-    //Test.assertEquals(convert("15", dec, bin), '1111', '"15" dec -> bin');
+    expect(convertToDecimal('15', dec)).toEqual(15);
+    expect(convertToTarget(15, bin)).toEqual('1111');
+    Test.assertEquals(convert("15", dec, bin), '1111', '"15" dec -> bin');
 
     expect(convertToTarget(15, oct)).toEqual('17');
-    //Test.assertEquals(convert("15", dec, oct), '17', '"15" dec -> oct');
+    Test.assertEquals(convert("15", dec, oct), '17', '"15" dec -> oct');
 
-    //Test.assertEquals(convert("1010", bin, dec), '10', '"1010" bin -> dec');
-    //Test.assertEquals(convert("1010", bin, hex), 'a', '"1010" bin -> hex');
+    Test.assertEquals(convert("1010", bin, dec), '10', '"1010" bin -> dec');
+    Test.assertEquals(convert("1010", bin, hex), 'a', '"1010" bin -> hex');
 
   });
   
   it('should convert between other bases', function() {
-    //Test.assertEquals(convert("0", dec, alpha), 'a', '"0" dec -> alpha');
-    //Test.assertEquals(convert("27", dec, allow), 'bb', '"27" dec -> alpha_lower');
-    //Test.assertEquals(convert("hello", allow, hex), '320048', '"hello" alpha_lower -> hex')
-    //Test.assertEquals(convert("SAME", alup, alup), 'SAME', '"SAME" alpha_upper -> alpha_upper');
+    Test.assertEquals(convert("0", dec, alpha), 'a', '"0" dec -> alpha');
+    Test.assertEquals(convert("27", dec, allow), 'bb', '"27" dec -> alpha_lower');
+    Test.assertEquals(convert("hello", allow, hex), '320048', '"hello" alpha_lower -> hex');
+    Test.assertEquals(convert("SAME", alup, alup), 'SAME', '"SAME" alpha_upper -> alpha_upper');
   });
 });
